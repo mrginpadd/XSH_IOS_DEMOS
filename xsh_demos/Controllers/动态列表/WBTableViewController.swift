@@ -18,14 +18,13 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 30))
         footerView.backgroundColor = .systemGray
         let textLabel = UILabel()
-        let indicatorView = UIActivityIndicatorView(style: .medium)
-        indicatorView.color = .red
-
         textLabel.text = "加载更多..."
         //水平垂直居中
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 0
         
+        let indicatorView = UIActivityIndicatorView(style: .medium)
+        indicatorView.color = .red
         //指示器动画
         indicatorView.startAnimating()
 
@@ -64,10 +63,10 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
     // MARK: - 数据请求
     
     func fetchData() {
-        getMsgList()
+        getMsgList(completion: nil)
     }
     
-    func getMsgList() {
+    func getMsgList(completion: ((Bool) -> Void)?) {
         NewWorkConfig.getMsgList { res in
             if let list = res["list"] as? [Any] {
                 list.forEach({ item in
@@ -79,6 +78,8 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
             } else {
                 self.msgList = []
             }
+            
+            completion?(true)
             
             self.refreshTableView()
             
@@ -110,6 +111,17 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
 
     }
     
+    @objc func refreshData() {
+        
+        self.msgList.removeAll()
+        getMsgList { done in
+            DispatchQueue.main.async {
+                self.tableView.refreshControl?.endRefreshing()
+            }
+        }
+        
+    }
+    
     func refreshTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -133,7 +145,22 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
         //注册复用单元格
         tableView.register(WBTableCellView.self, forCellReuseIdentifier: cellID)
         
-        self.tableView.tableFooterView = self.footerView
+        //下拉刷新
+        let refreshControl = UIRefreshControl()
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 16),
+            .foregroundColor: UIColor.gray
+        ]
+        refreshControl.attributedTitle = NSAttributedString(string: "下拉刷新", attributes: attributes)
+        // 将指示器放在文字的左侧
+        refreshControl.tintColor = .green
+
+        // 添加下拉刷新的事件处理
+        refreshControl.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
+        // 将refreshControl添加到对应的ScrollView中
+        tableView.refreshControl = refreshControl
+        //上拉加载更多
+        tableView.tableFooterView = footerView
 
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
