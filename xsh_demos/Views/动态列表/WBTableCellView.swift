@@ -27,6 +27,9 @@ class WBTableCellView: UITableViewCell {
             make?.width.equalTo()(UIScreen.main.bounds.width - 80)
         }
         contentView.addSubview(avatarView)
+        //圆形头像
+        avatarView.layer.cornerRadius = 25
+        avatarView.clipsToBounds = true
         avatarView.mas_makeConstraints { make in
             make?.width.equalTo()(50)
             make?.height.equalTo()(50)
