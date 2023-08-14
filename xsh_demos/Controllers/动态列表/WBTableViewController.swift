@@ -14,6 +14,35 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
     var tableView = UITableView()
     var msgList: [WBMsgModel] = []
     let cellID = "WEBCELLID"
+    lazy var footerView: UIView = {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 30))
+        footerView.backgroundColor = .systemGray
+        let textLabel = UILabel()
+        let indicatorView = UIActivityIndicatorView(style: .medium)
+        indicatorView.color = .red
+
+        textLabel.text = "加载更多..."
+        //水平垂直居中
+        textLabel.textAlignment = .center
+        textLabel.numberOfLines = 0
+        
+        //指示器动画
+        indicatorView.startAnimating()
+
+        footerView.addSubview(textLabel)
+        textLabel.mas_makeConstraints { make in
+            make?.center.equalTo()(footerView)
+            make?.height.equalTo()(30)
+        }
+        
+        
+        footerView.addSubview(indicatorView)
+        indicatorView.mas_makeConstraints { make in
+            make?.right.equalTo()(textLabel.mas_left)?.offset()(-5)
+            make?.centerY.equalTo()(footerView)
+        }
+        return footerView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,15 +76,43 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
                         self.msgList.append(model)
                     }
                 })
-                print("拿到的结果 \(self.msgList.count)")
             } else {
                 self.msgList = []
             }
             
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            self.refreshTableView()
             
+        }
+    }
+    
+    func loadMore() {
+        self.tableView.tableFooterView = self.footerView
+        // 显示加载更多的动画
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            NewWorkConfig.getMsgList { res in
+                if let list = res["list"] as? [Any] {
+                    list.forEach({ item in
+                        if let dic = item as? [String: Any] {
+                            let model = WBMsgModel(dictionary: dic)
+                            self.msgList.append(model)
+                        }
+                    })
+                } else {
+                    //加载失败
+                }
+                DispatchQueue.main.async {
+                    self.tableView.tableFooterView = nil
+                }
+                self.refreshTableView()
+
+            }
+        }
+
+    }
+    
+    func refreshTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
     }
     
@@ -76,7 +133,7 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
         //注册复用单元格
         tableView.register(WBTableCellView.self, forCellReuseIdentifier: cellID)
         
-        
+        self.tableView.tableFooterView = self.footerView
 
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
@@ -106,4 +163,13 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
         return cell!
     }
     
+  
+    //MARK: - 上拉加载更多
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if self.msgList.count > 1 && indexPath.row == self.msgList.count - 1 {
+            loadMore()
+        }
+    }
+
 }

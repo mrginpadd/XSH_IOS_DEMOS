@@ -24,7 +24,6 @@
 		A0ACF1192A88B4C3001975A0 /* WBTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACF1182A88B4C3001975A0 /* WBTableViewController.swift */; };
 		A0ACF1202A88B8B6001975A0 /* WBMsgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACF11F2A88B8B6001975A0 /* WBMsgModel.swift */; };
 		A0ACF1222A88C66C001975A0 /* JsonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACF1212A88C66C001975A0 /* JsonUtil.swift */; };
-		A0ACF12C2A8934F4001975A0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0ACF12B2A8934F4001975A0 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,9 +130,9 @@
 			isa = PBXGroup;
 			children = (
 				A0A482932A7F86B4002C31FE /* AppDelegate.swift */,
-				A0ACF12B2A8934F4001975A0 /* Info.plist */,
 				A0A482952A7F86B4002C31FE /* SceneDelegate.swift */,
 				A0A482972A7F86B4002C31FE /* ViewController.swift */,
+				A0ACF12B2A8934F4001975A0 /* Info.plist */,
 				A0ACF12A2A8932EE001975A0 /* 需求清单.h */,
 				A0ACF1112A887534001975A0 /* Extensions */,
 				A0ACF1102A88752B001975A0 /* Resources */,
@@ -361,7 +360,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0ACF12C2A8934F4001975A0 /* Info.plist in Resources */,
 				A0A482A32A7F86B5002C31FE /* LaunchScreen.storyboard in Resources */,
 				A0A482A02A7F86B5002C31FE /* Assets.xcassets in Resources */,
 				A0A4829B2A7F86B4002C31FE /* Main.storyboard in Resources */,
