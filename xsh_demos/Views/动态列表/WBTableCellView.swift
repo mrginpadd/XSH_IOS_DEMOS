@@ -62,7 +62,7 @@ class WBTableCellView: UITableViewCell {
         self.model = WBMsgModel(dictionary: [:])
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         contentView.mas_makeConstraints { make in
-            make?.width.equalTo()(UIScreen.main.bounds.width - 80)
+            make?.width.equalTo()(UIScreen.main.bounds.width - 5)
         }
         contentView.addSubview(avatarView)
         //圆形头像
@@ -75,7 +75,6 @@ class WBTableCellView: UITableViewCell {
         }
         contentView.addSubview(authorLabel)
         authorLabel.mas_makeConstraints { make in
-            make?.width.equalTo()(contentView)
             make?.height.equalTo()(20)
             make?.left.equalTo()(avatarView.mas_right)?.offset()(5)
         }
@@ -91,12 +90,8 @@ class WBTableCellView: UITableViewCell {
             make?.width.equalTo()(contentView)
             make?.height.lessThanOrEqualTo()(200)
             make?.top.equalTo()(timeLabel.mas_bottom)?.offset()(10)
-            make?.left.equalTo()(avatarView.mas_right)?.offset()(5)
+            make?.left.equalTo()(avatarView.mas_left)
         }
-        // 设置自动换行
-        detailLabel.lineBreakMode = .byWordWrapping
-        detailLabel.numberOfLines = 0
-    
         
     }
     
