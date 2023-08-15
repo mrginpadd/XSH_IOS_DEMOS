@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 class WBTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-   
+    
     var tableView = UITableView()
     var msgList: [WBMsgModel] = []
     let cellID = "WEBCELLID"
@@ -27,7 +27,7 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
         indicatorView.color = .red
         //指示器动画
         indicatorView.startAnimating()
-
+        
         footerView.addSubview(textLabel)
         textLabel.mas_makeConstraints { make in
             make?.center.equalTo()(footerView)
@@ -48,20 +48,21 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
         // 配置SDWebImageDownloader选项
         SDWebImageDownloader.shared.setValue("SDWebImage", forHTTPHeaderField: "User-Agent")
         SDWebImageDownloader.shared.config.downloadTimeout = 30.0
-//        SDWebImageDownloader.shared.http÷
+        //        SDWebImageDownloader.shared.http÷
         //视图设置
         setupViews()
         
         //数据请求
         fetchData()
         
-
+        
         
     }
     
-    
-    // MARK: - 数据请求
-    
+}
+
+// MARK: - 数据请求
+extension WBTableViewController {
     func fetchData() {
         getMsgList(completion: nil)
     }
@@ -85,7 +86,6 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
             
         }
     }
-    
     func loadMore() {
         self.tableView.tableFooterView = self.footerView
         // 显示加载更多的动画
@@ -121,14 +121,16 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
     }
+}
+
+//MARK: - 视图设置
+extension WBTableViewController {
     
     func refreshTableView() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
-    
-    //MARK: - 视图设置
     
     func setupViews() {
         //设置安全区
@@ -167,8 +169,11 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
         view.backgroundColor = UIColor.red
         view.addSubview(tableView)
     }
+}
+
+//MARK: - UITableView Delegate
+extension WBTableViewController {
     
-    //MARK: - UITableView Delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return msgList.count
     }
@@ -191,7 +196,6 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
         return cell!
     }
     
-  
     //MARK: - 上拉加载更多
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -199,5 +203,4 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
             loadMore()
         }
     }
-
 }
