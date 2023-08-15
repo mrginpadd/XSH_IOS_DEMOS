@@ -24,6 +24,7 @@
 		A0ACF1192A88B4C3001975A0 /* WBTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACF1182A88B4C3001975A0 /* WBTableViewController.swift */; };
 		A0ACF1202A88B8B6001975A0 /* WBMsgModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACF11F2A88B8B6001975A0 /* WBMsgModel.swift */; };
 		A0ACF1222A88C66C001975A0 /* JsonUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0ACF1212A88C66C001975A0 /* JsonUtil.swift */; };
+		A0B2E5672A8A7F8E00972A98 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2E5662A8A7F8E00972A98 /* UILabel+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		A0ACF1212A88C66C001975A0 /* JsonUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonUtil.swift; sourceTree = "<group>"; };
 		A0ACF12A2A8932EE001975A0 /* 需求清单.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "需求清单.h"; sourceTree = "<group>"; };
 		A0ACF12B2A8934F4001975A0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0B2E5662A8A7F8E00972A98 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		D1C643A5C30ABFA4600A8940 /* Pods-xsh_demos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xsh_demos.release.xcconfig"; path = "Target Support Files/Pods-xsh_demos/Pods-xsh_demos.release.xcconfig"; sourceTree = "<group>"; };
 		F04362078A5572491A22D7E5 /* Pods-xsh_demos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xsh_demos.debug.xcconfig"; path = "Target Support Files/Pods-xsh_demos/Pods-xsh_demos.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -216,6 +218,7 @@
 		A0ACF1112A887534001975A0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A0B2E5662A8A7F8E00972A98 /* UILabel+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0B2E5672A8A7F8E00972A98 /* UILabel+Extension.swift in Sources */,
 				A0A4829E2A7F86B4002C31FE /* xsh_demos.xcdatamodeld in Sources */,
 				A0ACF1172A88AAF2001975A0 /* WBTablePicsCollectionView.swift in Sources */,
 				A0A482982A7F86B4002C31FE /* ViewController.swift in Sources */,

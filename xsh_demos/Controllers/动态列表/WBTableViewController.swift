@@ -140,7 +140,9 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
         
         tableView.delegate = self
         tableView.dataSource = self
+       
         tableView.rowHeight = 200
+        
         tableView.frame = view.bounds
         //注册复用单元格
         tableView.register(WBTableCellView.self, forCellReuseIdentifier: cellID)
@@ -183,10 +185,9 @@ class WBTableViewController: UIViewController, UITableViewDataSource, UITableVie
            let imageUrl = URL(string: encodedUrlString) {
             cell?.avatarView.sd_setImage(with: imageUrl, placeholderImage: nil, context: nil)
         }
-        
-        cell?.authorLabel.text = self.msgList[indexPath.row].nickname
-        cell?.timeLabel.text = self.msgList[indexPath.row].timestamp
-        cell?.detailLabel.text = self.msgList[indexPath.row].content
+        cell?.model = self.msgList[indexPath.row]
+
+
         return cell!
     }
     
