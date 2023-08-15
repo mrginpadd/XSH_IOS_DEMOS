@@ -13,7 +13,12 @@ class WBTabbarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.frame = UIScreen.main.bounds
-        view.backgroundColor = .red
+        //设置安全区
+        view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        
         setupViews()
         
     }
